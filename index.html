@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>NOTAKTO</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <h1 class = "title">NOTAKTO</h1>
+
+    <div id="inst-box" hidden class="inst-box">
+        <h4 class="cross">X</h4>
+        <h3>Rules of Game</h3>
+        <pr class="inst-text">Just like tic tac toe, this game is played between two players,
+            adding a symbol to the board in turns. However, unlike tic tac toe, the players use
+            the same symbol (a cross), and can both contribute to the same line. Interestingly,
+            although this is a simplification of tic tac toe, it actually improves the game by
+            making a draw impossible instead of practically guaranteed.
+            Note that in the game below, each player's symbol is drawn in a same colour.</pr>
+        <br />
+    </div>
+
+
+    <div id="inst-box-htp" hidden class="inst-box">
+        <h4 class="cross">X</h4>
+        <h3>How to Play?</h3>
+        <pr class="inst-text">This is multiplayer Game. You have two options 'Create Game' and 'Join Game'.
+            Before creating a game, you will need to input your name and select the rows, columns and length.
+            The Rows and Column specfies the dimension of the grid. The length specifies the winning condition of the
+            game e.g
+            '3' length means that the game will end when a player makes a 3 in a row of 'X'. After pressing the 'Create
+            Game' button,
+            you will be provided with a Room ID.
+
+        </pr>
+        <pr class="inst-text">For joining the game, input your name first and ask your friend to share the Room ID with
+            you.
+
+        </pr>
+        <br />
+    </div>
+
+    <div class="menu">
+        <h2>Enter Name</h2>
+        <input type="text" id="user-name" name="user-name" placeholder="Enter Name" class="user-name" />
+        <br />
+        <br />
+        <div class="selector-container" id="settings">
+            <div>
+                <label for="dimensionsRow">Row </label>
+                <select name="dimensionsRow" id="dimensionsRow">
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="6">7</option>
+                    <option value="6">8</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="dimensionsCol">Column</label>
+                <select name="dimensionsCol" id="dimensionsCol">
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="5">7</option>
+                    <option value="6">8</option>
+                </select>
+            </div>
+            <div>
+                <label for="length">Length</label>
+                <select name="length" id="length">
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <br />
+        <button class="button" id="create-game" onclick="createGame()">Create Game</button>
+        <br />
+        <br />
+        <h3>OR</h3>
+        <br />
+        <input type="text" id="room-id" name="room-id" placeholder="Room ID" />
+        <button class="button" id="join-game" onclick="joinGame()">Join Game</button>
+        <br />
+        <br />
+        <br />
+        <div id = "footer-box">
+            <p id="rules-of-game" class="pointer inline"><u>Rules of Game</u></p>
+            <br/>
+            <p id="how-to-play" class="pointer inline"><u>How to play?</u></p>
+            <br/>
+            <p id="single-player" class="pointer inline"><a href="https://github.com/hamzasumbal"><u>developer</u></a></p>
+        </div>
+    </div>
+
+
+
+
+    <div id="room-id-box" hidden>
+        <h3 id="room-id-text">Room</h3>
+        <p>Send this code to your friend</p>
+        <p class="small-text">(Code is copied to clipboard (maybe))</p>
+        <h3 class="oponent-wait">Waiting for your Opponent ...</h3>
+    </div>
+
+    <div class="selector-container setting-show" hidden id="settings">
+        <p id="row-show">
+        </p>
+        <p id="col-show">
+        </p>
+        <p id='length-show'>
+        </p>
+    </div>
+
+    <div class="game-box">
+        <div id="game-container" class=" class1 class2">
+            <div id="turn"></div>
+        </div>
+    </div>
+
+
+    <div class="game-box">
+        <div id="game-container" class="hide class1 class2">
+            <div id="turn"></div>
+        </div>
+    </div>
+
+    <button class="button" id="play-again" hidden>Play Again</button>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="config/keys.js"></script>
+    <script src="index-min.js"></script>
+</body>
+
+</html>

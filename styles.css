@@ -1,0 +1,200 @@
+body {
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+  h1{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+
+  .inst-box{
+    position: absolute;
+    margin: 10% 5%;
+    border : 2px white solid;
+    background-color: black;
+    padding: 3%;
+  }
+
+  .title{
+    margin-bottom: 40px;
+  }
+
+  .cross{
+    position:absolute;
+    right: 15px;
+    top:  -10px;
+    font-size: 20px;
+    cursor: pointer; 
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  #play-again{
+
+    margin-top: 10%;
+
+  }
+
+  #single-player{
+
+    margin-top: 20%;
+    color : rgb(98, 98, 248)
+  }
+
+  .inst-text{
+    text-align: start;
+    line-height: 1.5rem;
+    margin: 0 auto 0 auto;
+
+  }
+  
+  #game-container {
+    margin: 10px 10px;
+    text-align: center;
+  }
+
+
+  .inline{
+    display: inline-block;
+  }
+
+
+
+  #room-id-text{
+
+    color: green;
+  }
+
+  .small-text{
+      font-size: 0.7rem;
+  }
+
+  .oponent-wait{
+
+    margin-top: 20%;
+  }
+
+  .game-box{
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+
+  #turn{
+      margin-bottom: 15%;
+  }
+  
+  .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    height: 50px;
+    width: 50px;
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #start-game{
+      margin: 10px;
+  }
+
+  .button{
+    margin : 10px;
+  }
+
+
+  .invisible{
+      visibility: hidden;
+  }
+
+  .menu{
+      margin-top: 22%;
+  }
+
+  .user-name{
+      margin-bottom: 15%;
+  }
+
+
+  .selector-container{
+      margin-top: 0px;
+    display:inline-flex;    
+      align-items: center;
+      width: 95%;
+      justify-content: space-around;
+  }
+
+  
+
+  .setting-show{
+      margin-bottom: 10%;
+  }
+
+  .red{
+      color :red
+  }
+
+  .green{
+      color: green;
+  }
+
+  .player-title{
+      display: inline-block;
+      margin-right: 10px;
+  }
+  
+
+  @media (min-width : 900px) {
+
+    .selector-container{
+        display:inline-flex;
+       width: 30%;
+       align-self: center;
+    }
+    .menu{
+        margin-top: 20px;
+    }
+    .user-name{
+        margin-bottom: 50px;
+    }
+    .turn{
+        margin-bottom: 15px;
+    }
+    .oponent-wait{
+
+        margin-top: 40px;
+      }
+      .setting-show{
+        margin-bottom: 30px;
+    }
+    #play-again{
+
+      margin-top: 10px;
+  
+    }
+    #single-player{
+
+      margin-top: 50px;
+      color : rgb(98, 98, 248)
+    }
+      
+  }
