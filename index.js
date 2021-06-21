@@ -17,24 +17,24 @@
 
 }())
 
-document.querySelector('#rules-of-game').onclick = ()=>{
+document.querySelector('#rules-of-game').onclick = () => {
     document.querySelector('#inst-box').removeAttribute('hidden')
 }
 
-document.querySelector('#how-to-play').onclick = ()=>{
+document.querySelector('#how-to-play').onclick = () => {
     document.querySelector('#inst-box-htp').removeAttribute('hidden')
 }
 
-document.querySelector('.cross').onclick = ()=>{
+document.querySelector('.cross').onclick = () => {
     document.querySelector('#inst-box').setAttribute('hidden', true)
     document.querySelector('#inst-box-htp').setAttribute('hidden', true)
 }
 
-document.querySelector('.cross').onclick = ()=>{
+document.querySelector('.cross').onclick = () => {
     document.querySelector('#inst-box').setAttribute('hidden', true)
 }
 
-document.querySelector('#inst-box-htp .cross').onclick = ()=>{
+document.querySelector('#inst-box-htp .cross').onclick = () => {
     document.querySelector('#inst-box-htp').setAttribute('hidden', true)
 }
 
@@ -103,6 +103,7 @@ const createGame = async () => {
         return;
     }
     document.querySelector('.menu').setAttribute('hidden', true)
+    document.querySelector('#loading').removeAttribute('hidden')
     const timeStamp = new Date().getTime() % 1e6;
 
 
@@ -125,11 +126,13 @@ const createGame = async () => {
 
     } catch {
         alert("something went wrong. try again")
+        document.querySelector('.menu').removeAttribute('hidden')
+        document.querySelector('#loading').setAttribute('hidden', true)
         return;
     }
 
     console.log(timeStamp)
-
+    document.querySelector('#loading').setAttribute('hidden', true)
     document.querySelector('#room-id-box').removeAttribute('hidden')
     document.querySelector('#room-id-text').textContent = `Room ID : ${timeStamp}`
     copyToClipboard(timeStamp)
@@ -144,7 +147,7 @@ const createGame = async () => {
             document.querySelector('#room-id-box').setAttribute('hidden', true)
             document.querySelector('#rules-of-game').setAttribute('hidden', true)
             document.querySelector('#how-to-play').setAttribute('hidden', true)
-            document.querySelector('#footer-box').setAttribute('hidden',true)
+            document.querySelector('#footer-box').setAttribute('hidden', true)
             readDatabase.off()
             startGame(dataSet, timeStamp)
         }
@@ -159,23 +162,30 @@ const copyToClipboard = str => {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-  };
+};
 
 
 const joinGame = async () => {
     let username = document.getElementById("user-name").value;
     let roomID = document.getElementById("room-id").value;
+
+
+
     if (isEmpty(username)) {
         alert("Player name is required");
         return;
     }
 
-    if(isEmpty(roomID))
-    {
+    if (isEmpty(roomID)) {
         alert("Enter Room ID");
         return;
     }
-    
+
+    document.querySelector('#join-game').setAttribute('disabled', true)
+    document.querySelector('#room-id').setAttribute('disabled', true)
+    document.querySelector('#join-game').innerHTML = "Loading"
+
+
 
     let data;
 
@@ -185,8 +195,7 @@ const joinGame = async () => {
             data = snapshot.val();
             console.log(snapshot.val());
 
-            if(username === data.player1)
-            {
+            if (username === data.player1) {
                 alert("Your name is same as your oponent, Please change")
                 return
             }
@@ -197,10 +206,11 @@ const joinGame = async () => {
             });
 
             console.log("player 2 is loaded")
+            document.querySelector('#join-game').removeAttribute('disabled')
             document.querySelector('.menu').setAttribute('hidden', true)
             document.querySelector('#rules-of-game').setAttribute('hidden', true)
             document.querySelector('#how-to-play').setAttribute('hidden', true)
-            document.querySelector('#footer-box').setAttribute('hidden',true)
+            document.querySelector('#footer-box').setAttribute('hidden', true)
             startGame(data, roomID)
 
 
@@ -211,6 +221,10 @@ const joinGame = async () => {
     }).catch((error) => {
         console.error(error);
         alert("Something went wrong, try again")
+        document.querySelector('#join-game').removeAttribute('disabled')
+        document.querySelector('#room-id').removeAttribute('disabled')
+        document.querySelector('#join-game').innerHTML = "Join Game"
+
         return;
     });
 
@@ -220,17 +234,15 @@ const joinGame = async () => {
 
 const startGame = async (data, roomID) => {
 
+
+
+
+
+
     let username = document.getElementById("user-name").value;
     let game = document.getElementById("game-container");
     var readDatabase = firebase.database().ref(`rooms/${roomID}`);
     game.classList.remove("hide");
-
-    let gameContainer = document.getElementById("game-container");
-
-
-    /*  let board = new Array(Number(data.row))
-         .fill("")
-         .map(() => new Array(Number(data.col)).fill("")); */
 
 
     document.getElementById("turn").innerHTML = data.turn + "'s turn";
@@ -240,7 +252,21 @@ const startGame = async (data, roomID) => {
     document.getElementById("length-show").innerHTML = `Length: ${data.length}`
 
 
-    let boardsss = [['X', "", ""], ["", "X", ""], ["", "", "X"]];
+    let gameContainer = document.getElementById("game-container");
+
+
+    if (window.matchMedia("(max-width: 350px)")) {
+        if (Number(data.col) > 6) {
+            gameContainer.style.transform = 'scale(0.8)'
+            gameContainer.style.position = "relative";
+            gameContainer.style.bottom = "20px"
+        }
+
+    }
+
+
+
+
 
 
     let board = data.board;
@@ -330,35 +356,33 @@ const startGame = async (data, roomID) => {
                 alert(`${data.win} Won`)
                 readDatabase.off()
                 document.getElementById("play-again").removeAttribute('hidden')
- 
-                 document.getElementById("play-again").onclick = async () => {
- 
-                     let dataSet = {
-                         player1: data.player1,
-                         row: data.row,
-                         col: data.col,
-                         length: data.length,
-                         ready1: true,
-                         ready2: true,
-                         win: null,
-                         board: new Array(Number(data.row))
-                             .fill("")
-                             .map(() => new Array(Number(data.col)).fill(""))
-                     }
- 
-                     await firebase.database().ref(`rooms/${roomID}`).update(dataSet);
- 
-                     document.getElementById("play-again").setAttribute('hidden', true)
-                     for(let i = 0; i < data.row ; i++)
-                     {
-                         for(let j =0; j< data.col ; j++)
-                         {
-                             document.querySelector(`#cell${i}${j}`).remove();
-                         }
-                     }
-                     startGame(dataSet, roomID) 
- 
-                 }
+
+                document.getElementById("play-again").onclick = async () => {
+
+                    let dataSet = {
+                        player1: data.player1,
+                        row: data.row,
+                        col: data.col,
+                        length: data.length,
+                        ready1: true,
+                        ready2: true,
+                        win: null,
+                        board: new Array(Number(data.row))
+                            .fill("")
+                            .map(() => new Array(Number(data.col)).fill(""))
+                    }
+
+                    await firebase.database().ref(`rooms/${roomID}`).update(dataSet);
+
+                    document.getElementById("play-again").setAttribute('hidden', true)
+                    for (let i = 0; i < data.row; i++) {
+                        for (let j = 0; j < data.col; j++) {
+                            document.querySelector(`#cell${i}${j}`).remove();
+                        }
+                    }
+                    startGame(dataSet, roomID)
+
+                }
 
             }
 
