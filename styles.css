@@ -130,6 +130,9 @@ body {
 
   .button{
     margin : 10px;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 0.9rem;
   }
 
 
@@ -172,7 +175,13 @@ body {
       display: inline-block;
       margin-right: 10px;
   }
-  
+
+  .input{
+    font-size: 0.9rem;
+    border-radius: 7px;
+    padding-left: 10px;
+    padding: 5px 10px;
+  }
 
   @media (min-width : 900px) {
 

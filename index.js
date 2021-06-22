@@ -17,6 +17,8 @@
 
 }())
 
+var audio1 = new Audio("https://firebasestorage.googleapis.com/v0/b/notakto-8effd.appspot.com/o/scribble%20(1).mp3?alt=media&token=3c11a10f-3171-4df0-8a2d-2beeb2d802c5")
+
 document.querySelector('#rules-of-game').onclick = () => {
     document.querySelector('#inst-box').removeAttribute('hidden')
 }
@@ -235,7 +237,7 @@ const joinGame = async () => {
 const startGame = async (data, roomID) => {
 
 
-
+    let counter = 0;
 
 
 
@@ -280,6 +282,8 @@ const startGame = async (data, roomID) => {
             cell.setAttribute('id', `cell${i}${j}`)
             cell.addEventListener("click", (event) => {
 
+               
+                
 
                 const dbRef = firebase.database().ref();
                 dbRef.child(`rooms/${roomID}`).get().then(async (snapshot) => {
@@ -290,6 +294,7 @@ const startGame = async (data, roomID) => {
 
 
                         if (tempData.turn === username & board[i][j] === "") {
+                            audio1.play()
                             board[i][j] = "X";
                             firebase.database().ref(`rooms/${roomID}`).update({
                                 board: board,
@@ -336,6 +341,13 @@ const startGame = async (data, roomID) => {
     readDatabase.on('value', async (snapshot) => {
         const data = snapshot.val();
         console.log("value changed")
+
+        if(data.turn === username)
+        {
+            audio1.play()
+            
+        }
+        counter++
 
         if (data) {
             board = data.board
