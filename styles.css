@@ -1,8 +1,17 @@
 body {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+  .light-mode{
+    background-color: aliceblue;
+    color: black;
+  }
+
+  .dark-mode{
     background-color: black;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
   }
 
 
@@ -29,6 +38,17 @@ body {
     padding: 3%;
   }
 
+  .inst-box-dark{
+    border : 2px white solid;
+    background-color: black;
+  }
+
+  .inst-box-light{
+    border : 2px black solid;
+    background-color: white;
+  }
+
+
   .title{
     margin-bottom: 40px;
   }
@@ -52,8 +72,7 @@ body {
   }
 
   #single-player{
-
-    margin-top: 20%;
+    margin-top: 5%;
     color : rgb(98, 98, 248)
   }
 
@@ -114,7 +133,15 @@ body {
     border: 1px solid white;
     border-radius: 5px;
   }
+
+  .cell-black-border{
+    border: 1px solid black;
+  }
   
+  .cell-white-border{
+    border: 1px solid white;
+  }
+
   .hide {
     display: none;
   }
@@ -183,6 +210,84 @@ body {
     padding-left: 10px;
     padding: 5px 10px;
   }
+
+  .switch-box{
+    width: 130px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-top: 10px;
+    top: -5px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #ccc;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #ccc;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+  #footer-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
 
   @media (min-width : 900px) {
 

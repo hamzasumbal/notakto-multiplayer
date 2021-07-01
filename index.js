@@ -47,6 +47,7 @@ let gameOver = false;
 let dimensionRow = parseInt(document.getElementById("dimensionsRow").value);
 let dimensionCol = parseInt(document.getElementById("dimensionsCol").value);
 let length = parseInt(document.getElementById("length").value);
+let theme = "light"
 let board = new Array(dimensionRow)
     .fill("")
     .map(() => new Array(dimensionCol).fill(""));
@@ -82,6 +83,29 @@ const changeLength = (event) => {
         return;
     }
 };
+
+
+const changeTheme = (event)=>{
+    console.log(event)
+}
+
+var checkbox = document.querySelector("#theme-selector");
+checkbox.addEventListener('change', function(event) {
+  if (this.checked) {
+    document.body.classList.remove('light-mode')
+    document.body.classList.add('dark-mode')
+    document.getElementById('inst-box').className = "inst-box inst-box-dark"
+    document.getElementById('inst-box-htp').className = "inst-box inst-box-dark"
+
+    theme = "dark"
+  } else {
+    document.body.classList.add('light-mode')
+    document.body.classList.remove('dark-mode')
+    document.getElementById('inst-box').className = "inst-box inst-box-light"
+    document.getElementById('inst-box-htp').className = "inst-box inst-box-light"
+    theme = "light"
+  }
+});
 
 document
     .getElementById("dimensionsRow")
@@ -321,7 +345,13 @@ const startGame = async (data, roomID) => {
 
 
             });
-            cell.className = "cell";
+            if(theme === "dark")
+            {
+                cell.className = "cell cell-white-border"
+            }
+            else{
+                cell.className = "cell cell-black-border"
+            }
             row.appendChild(cell);
         }
         gameContainer.appendChild(row);
