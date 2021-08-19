@@ -221,6 +221,9 @@ const joinGame = async () => {
 
             if (username === data.player1) {
                 alert("Your name is same as your oponent, Please change")
+                document.querySelector('#join-game').removeAttribute('disabled')
+                document.querySelector('#room-id').removeAttribute('disabled')
+                document.querySelector('#join-game').innerHTML = "Join Game"
                 return
             }
 
@@ -240,6 +243,9 @@ const joinGame = async () => {
 
         } else {
             alert("Wrong Room ID")
+            document.querySelector('#join-game').removeAttribute('disabled')
+            document.querySelector('#room-id').removeAttribute('disabled')
+            document.querySelector('#join-game').innerHTML = "Join Game"
             return;
         }
     }).catch((error) => {
