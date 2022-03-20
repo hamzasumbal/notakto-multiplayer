@@ -306,4 +306,7 @@ input:checked + .slider:before {
     margin-top: 50px;
     color: rgb(98, 98, 248);
   }
+  .inst-box {
+    margin: 10% 20%;
+  }
 }
