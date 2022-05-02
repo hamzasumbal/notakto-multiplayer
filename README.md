@@ -1,3 +1,3 @@
 # notakto-multiplayer
 
-https://notakto-play.web.app
+https://play.hamzasumbal.com/
