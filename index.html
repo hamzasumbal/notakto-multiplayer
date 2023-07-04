@@ -1,175 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>NOTAKTO</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body class="light-mode">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A multiplayer game similar to tic tac toe. Create or join a game, and compete against your friends." />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>NOTAKTO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="light-mode">
+  <header>
     <h1 class="title">NOTAKTO</h1>
+  </header>
 
-    <h3 class="loading" hidden id="loading">Loading ...</h3>
+  <h3 class="loading" hidden id="loading">Loading ...</h3>
 
-    <div id="inst-box" hidden class="inst-box inst-box-light">
-      <h4 class="cross">X</h4>
-      <h3>Rules of Game</h3>
-      <pr class="inst-text"
-        >Just like tic tac toe, this game is played between two players, adding
-        a symbol to the board in turns. However, unlike tic tac toe, the players
-        use the same symbol (a cross), and can both contribute to the same line.
-        Interestingly, although this is a simplification of tic tac toe, it
-        actually improves the game by making a draw impossible instead of
-        practically guaranteed. Note that in the game below, each player's
-        symbol is drawn in a same colour.</pr
-      >
-      <br />
+  <section id="inst-box" hidden class="inst-box inst-box-light">
+    <h4 class="cross">X</h4>
+    <h2>Rules of the Game</h2>
+    <p class="inst-text">
+      Just like tic tac toe, this game is played between two players, adding a symbol to the board in turns. However, unlike tic tac toe, the players use the same symbol (a cross), and can both contribute to the same line. Interestingly, although this is a simplification of tic tac toe, it actually improves the game by making a draw impossible instead of practically guaranteed. Note that in the game below, each player's symbol is drawn in the same color.
+    </p>
+  </section>
+
+  <section id="inst-box-htp" hidden class="inst-box inst-box-light">
+    <h4 class="cross">X</h4>
+    <h2>How to Play?</h2>
+    <p class="inst-text">
+      In this multiplayer game, you have two options: "Create Game" and "Join Game." To begin, you need to provide your name and make selections for the rows, columns, and winning condition. The number of rows and columns determines the dimensions of the grid, while the winning condition length specifies the number of consecutive symbols required to win (e.g., making a line of three 'X' marks).
+    </p>
+    <p class="inst-text">
+      After entering your name and selecting the game parameters, you can press the "Create Game" button. This action will generate a unique Room ID that you can share with your friend to invite them to join the game.
+    </p>
+    <p class="inst-text">
+      To join a game, your friend needs to input their name and request the Room ID from you. Once they have the Room ID, they can choose the "Join Game" option.
+    </p>
+  </section>
+
+  <section class="menu">
+    <h2>Enter Name</h2>
+    <input type="text" id="user-name" name="user-name" placeholder="Enter your name" class="user-name input" />
+    <br /><br />
+    <div class="selector-container" id="settings">
+      <div>
+        <label for="dimensionsRow">Row</label>
+        <select name="dimensionsRow" id="dimensionsRow">
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8" selected="selected">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+      <div>
+        <label for="dimensionsCol">Column</label>
+        <select name="dimensionsCol" id="dimensionsCol">
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8" selected="selected">8</option>
+        </select>
+      </div>
+      <div>
+        <label for="length">Length</label>
+        <select name="length" id="length">
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
     </div>
-
-    <div id="inst-box-htp" hidden class="inst-box inst-box-light">
-      <h4 class="cross">X</h4>
-      <h3>How to Play?</h3>
-      <pr class="inst-text"
-        >This is multiplayer Game. You have two options 'Create Game' and 'Join
-        Game'. Before creating a game, you will need to input your name and
-        select the rows, columns and length. The Rows and Column specfies the
-        dimension of the grid. The length specifies the winning condition of the
-        game e.g '3' length means that the game will end when a player makes a 3
-        in a row of 'X'. After pressing the 'Create Game' button, you will be
-        provided with a Room ID.
-      </pr>
-      <pr class="inst-text"
-        >For joining the game, input your name first and ask your friend to
-        share the Room ID with you.
-      </pr>
-      <br />
-    </div>
-
-    <div class="menu">
-      <h2>Enter Name</h2>
-      <input
-        type="text"
-        id="user-name"
-        name="user-name"
-        placeholder="Enter your name"
-        class="user-name input"
-      />
-      <br />
-      <br />
-      <div class="selector-container" id="settings">
+    <br /><br />
+    <button class="button" id="create-game" onclick="createGame()">Create Game</button>
+    <br /><br />
+    <h3>OR</h3>
+    <br />
+    <input type="text" id="room-id" name="room-id" placeholder="Room ID" class="input" />
+    <button class="button" id="join-game" onclick="joinGame()">Join Game</button>
+    <br /><br /><br />
+    <div id="footer-box">
+      <p id="rules-of-game" class="pointer inline"><u>Rules of Game</u></p>
+      <p id="how-to-play" class="pointer inline"><u>How to play?</u></p>
+      <div class="switch-box">
+        <h3>☀️</h3>
         <div>
-          <label for="dimensionsRow">Row </label>
-          <select name="dimensionsRow" id="dimensionsRow">
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8" selected = 'selected'>8</option>
-            <option value="9">9</option>
-          </select>
+          <label class="switch">
+            <input type="checkbox" id="theme-selector" />
+            <span class="slider round"></span>
+          </label>
         </div>
-
-        <div>
-          <label for="dimensionsCol">Column</label>
-          <select name="dimensionsCol" id="dimensionsCol">
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8" selected = 'selected'>8</option>
-          </select>
-        </div>
-        <div>
-          <label for="length">Length</label>
-          <select name="length" id="length">
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
+        <h3>🌙</h3>
       </div>
-      <br />
-      <br />
-      <button class="button" id="create-game" onclick="createGame()">
-        Create Game
-      </button>
-      <br />
-      <br />
-      <h3>OR</h3>
-      <br />
-      <input
-        type="text"
-        id="room-id"
-        name="room-id"
-        placeholder="Room ID"
-        class="input"
-      />
-      <button class="button" id="join-game" onclick="joinGame()">
-        Join Game
-      </button>
-      <br />
-      <br />
-      <br />
-      <div id="footer-box">
-        <p id="rules-of-game" class="pointer inline"><u>Rules of Game</u></p>
-        <p id="how-to-play" class="pointer inline"><u>How to play?</u></p>
-        <div class="switch-box">
-          <h3>☀️</h3>
-          <div>
-            <label class="switch">
-              <input type="checkbox" id="theme-selector" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <h3>🌙</h3>
-        </div>
-        <p id="single-player" class="pointer">
-          <a href="https://github.com/hamzasumbal"><u>developer</u></a>
-        </p>
-      </div>
+      <p id="single-player" class="pointer">
+        <a href="https://github.com/hamzasumbal"><u>developer</u></a>
+      </p>
     </div>
+  </section>
 
-    <div id="room-id-box" hidden>
-      <h3 id="room-id-text">Room</h3>
-      <p>Send this code to your friend</p>
-      <p class="small-text">(Code is copied to clipboard (maybe))</p>
-      <h3 class="oponent-wait">Waiting for your Opponent ...</h3>
+  <section id="room-id-box" hidden>
+    <h2 id="room-id-text">Room</h2>
+    <p>Send this code to your friend</p>
+    <p class="small-text">(Code is copied to clipboard (maybe))</p>
+    <h3 class="opponent-wait">Waiting for your Opponent ...</h3>
+  </section>
+
+  <section class="selector-container setting-show" hidden id="settings">
+    <p id="row-show"></p>
+    <p id="col-show"></p>
+    <p id="length-show"></p>
+  </section>
+
+  <section class="game-box">
+    <div id="game-container">
+      <div id="turn"></div>
     </div>
+  </section>
 
-    <div class="selector-container setting-show" hidden id="settings">
-      <p id="row-show"></p>
-      <p id="col-show"></p>
-      <p id="length-show"></p>
-    </div>
+  <button class="button" id="play-again" hidden>Play Again</button>
 
-    <div class="game-box">
-      <div id="game-container" class="class1 class2">
-        <div id="turn"></div>
-      </div>
-    </div>
-
-    <div class="game-box">
-      <div id="game-container" class="hide class1 class2">
-        <div id="turn"></div>
-      </div>
-    </div>
-
-    <button class="button" id="play-again" hidden>Play Again</button>
-
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    <script src="config/keys.js"></script>
-    <script src="index.js"></script>
-  </body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+  <script src="config/keys.js"></script>
+  <script src="index-min.js"></script>
+</body>
 </html>
